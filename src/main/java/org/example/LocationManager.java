@@ -39,7 +39,12 @@ public class LocationManager {
 
     public Room moveForward() {
         roomCounter++;
-        return this.room.get(roomCounter);
+        if (roomCounter > room.size()){
+            roomCounter = room.size();
+            return room.get(roomCounter);
+        }else if (roomCounter <0){
+            return room.get(0);
+        }else return room.get(roomCounter);
     }
 
     public Room goBack() {

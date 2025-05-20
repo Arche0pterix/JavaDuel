@@ -1,6 +1,6 @@
 package org.example;
 
-public class Locations extends LocationManager {
+public class Locations{
     String name;
     int locationId;
     int areaLevel;

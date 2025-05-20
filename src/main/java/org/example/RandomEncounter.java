@@ -7,9 +7,11 @@ public class RandomEncounter {
     Random random = new Random();
     int randomInt;
     ArrayList<Duelist> duelistList = new ArrayList<Duelist>();
-    public RandomEncounter(){
+
+    public RandomEncounter() {
         initMonsterList();
     }
+
     public void initMonsterList() {
         duelistList.add(new Duelist(0, 0, "Crow", 50, 50, 0, 6, 20, 4, 15000));
         duelistList.add(new Duelist(1, 3, "Fox", 130, 130, 0, 10, 9, 8, 7000));
@@ -22,12 +24,13 @@ public class RandomEncounter {
         duelistList.add(new Duelist(8, 0, "Chicken", 10, 10, 0, 4, 14, 1, 10000));
         duelistList.add(new Duelist(9, 2, "Wasp", 30, 30, 100, 4, 16, 2, 11000));
     }
-    public Duelist pickRandomEnemy(Duelist duelist){
-        randomInt = random.nextInt(duelistList.size()+1);
-        while (duelist.level <= duelistList.get(randomInt).level){
+
+    public Duelist pickRandomEnemy(Duelist duelist) {
+        randomInt = random.nextInt(duelistList.size());
+        while (duelist.level <= duelistList.get(randomInt).level) {
             randomInt = random.nextInt(duelistList.size());
         }
-         return duelistList.get(randomInt);
+        return duelistList.get(randomInt);
     }
 
     public Equipment pickRandomEquipment() {
@@ -41,7 +44,19 @@ public class RandomEncounter {
         return gearList.get(random.nextInt(5));
     }
 
-    /*
-    Random encounter class , contains random encounter methods
-    */
+    public Equipment randomLoot() {
+        int numberR = random.nextInt(5);
+        if (numberR == 1) {
+            return pickRandomEquipment();
+        } else return null;
+    }
+    public void healingSequence(Duelist duelist1) {
+        int recovery = random.nextInt(50) + 30;
+        System.out.println("You found healing fountain, you recovered " + recovery + " Hp");
+        duelist1.health += recovery;
+        if (duelist1.health > duelist1.maxHealth) {
+            duelist1.health = duelist1.maxHealth;
+
+        }
+    }
 }
