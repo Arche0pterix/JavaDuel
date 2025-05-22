@@ -25,13 +25,19 @@ public class RandomEncounter {
         duelistList.add(new Duelist(9, 2, "Wasp", 30, 30, 100, 4, 16, 2, 11000));
     }
 
+    public int getMonsterCount() {
+        return duelistList.size();
+    }
+
     public Duelist pickRandomEnemy(Duelist duelist) {
+
         randomInt = random.nextInt(duelistList.size());
         while (duelist.level <= duelistList.get(randomInt).level) {
             randomInt = random.nextInt(duelistList.size());
         }
-        return duelistList.get(randomInt);
+        return duelistList.get(randomInt).cloneDuelist();
     }
+
 
     public Equipment pickRandomEquipment() {
         ArrayList<Equipment> gearList = new ArrayList<Equipment>();
@@ -50,6 +56,7 @@ public class RandomEncounter {
             return pickRandomEquipment();
         } else return null;
     }
+
     public void healingSequence(Duelist duelist1) {
         int recovery = random.nextInt(50) + 30;
         System.out.println("You found healing fountain, you recovered " + recovery + " Hp");

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class LocationManager {
 
-    ArrayList<Room> room = new ArrayList<Room>();
+    ArrayList<Room> rooms = new ArrayList<Room>();
     public int roomCounter = 0;
-    public LocationManager(){
+
+    public LocationManager() {
         roomList();
     }
 
@@ -25,63 +26,58 @@ public class LocationManager {
     }
 
     public void roomList() {
-        room.add(new Room("Id 0,First room", 0, 0));
-        room.add(new Room("Id 1", 1, 1));
-        room.add(new Room("Id 2", 2, 2));
-        room.add(new Room("Id 3", 3, 3));
-        room.add(new Room("Id 4", 4, 4));
-        room.add(new Room("Healing Shrine", 5, 5));
-        room.add(new Room("Id 6", 6, 6));
-        room.add(new Room("Id 7", 7, 7));
-        room.add(new Room("Id 8", 8, 8));
-        room.add(new Room("Id 9,Final room", 9, 9));
+        rooms.add(new Room("Id 0,First room", 0, 0, false));
+        rooms.add(new Room("Id 1", 1, 1, false));
+        rooms.add(new Room("Id 2", 2, 2, false));
+        rooms.add(new Room("Id 3", 3, 3, false));
+        rooms.add(new Room("Id 4", 4, 4, false));
+        rooms.add(new Room("Healing Shrine", 5, 5, false));
+        rooms.add(new Room("Id 6", 6, 6, false));
+        rooms.add(new Room("Id 7", 7, 7, false));
+        rooms.add(new Room("Id 8", 8, 8, false));
+        rooms.add(new Room("Id 9,Final room", 9, 9, false));
+    }
+
+    public boolean isRoomCompleted() {
+        return rooms.get(roomCounter).roomCompleted;
+
     }
 
     public Room moveForward() {
+        rooms.get(roomCounter).roomCompleted = true;
+        for (int i = 0; i < rooms.size(); i++) {
+            System.out.println(i + " la" + rooms.get(i).roomCompleted);
+        }
         roomCounter++;
-        if (roomCounter > room.size()){
-            roomCounter = room.size();
-            return room.get(roomCounter);
-        }else if (roomCounter <0){
-            return room.get(0);
-        }else return room.get(roomCounter);
+        if (roomCounter > rooms.size()) {
+            roomCounter = rooms.size();
+            return rooms.get(roomCounter);
+        } else if (roomCounter < 0) {
+            return rooms.get(0);
+        } else return rooms.get(roomCounter);
     }
 
     public Room goBack() {
+        for (int i = 0; i < rooms.size(); i++) {
+            System.out.println(i + " la" + rooms.get(i).roomCompleted);
+        }
         roomCounter--;
-        return this.room.get(roomCounter);
+        if (roomCounter < 0) {
+            roomCounter = 0;
+            return rooms.get(roomCounter);
+        } else return rooms.get(roomCounter);
     }
 
+    public String getRoomName() {
+        return rooms.get(roomCounter).roomType;
+    }
+
+
 }
+
 /*
 
-//room like dungeon . С возможностью вернутся .
-room 1
-____
-battleSeq;
-randomGear;
-%shrine;
-next
-___
-room 2
-battleSeq;
-%randomGear;/sell/throw away gear.
-%shrine;
-next or back?
-----
-room 3
-chest etc.
-%randomGear;
-%shrine;
-next or back?
-...
-room 5
-hp recovery/rest
-...
-room 10
-battleSeq;Boss?
-%randomGear;
-%shrine;
-back/change location/restart location?
-finish
+
+если я был в номнате -> убрать все спавны - пустая .
+добавить true/false на чек после енкаунтера , сохранаять в коллекции из 10 комнат , в которых я буду
  */

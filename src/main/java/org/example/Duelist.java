@@ -127,6 +127,7 @@ public class Duelist {
 
     }
 
+
     void equipRing(Ring ring) {
         if (ringOneId != null && ringTwoId != null) {
             System.out.println("You cannot equip more than two rings");
@@ -233,5 +234,8 @@ public class Duelist {
             System.out.println(enemy.name + " has: " + enemy.health + " Hp");
             System.out.println();
         }
+    }
+    public Duelist cloneDuelist(){
+        return new Duelist(this.id,this.level, this.name,this.health, this.maxHealth, this.mana, this.damage, this.dexterity, this.strength, this.evasion);
     }
 }
